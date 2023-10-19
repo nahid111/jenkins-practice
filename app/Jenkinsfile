@@ -1,0 +1,29 @@
+pipeline {
+    agent any
+    
+    triggers {
+        pollSCM '* * * * *'
+    }
+    
+    stages {
+        stage('Test') {
+            steps {
+                echo "Testing.."
+                sh '''
+                cd app
+                go test -v
+                '''
+            }
+        }
+        stage('Build') {
+            steps {
+                echo "Building.."
+                sh '''
+                cd app
+                go build server.go
+                ls
+                '''
+            }
+        }
+    }
+}

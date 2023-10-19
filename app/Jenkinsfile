@@ -31,7 +31,7 @@ pipeline {
         always {
             // Report build status to GitHub using the GitHub Commit Status API
             script {
-                def commitSHA = sh(script: 'git rev-parse HEAD', returnStatus: true).trim() as String
+                def commitSHA = sh(script: 'git rev-parse HEAD', returnStatus: true).toString().trim()
                 def context = 'Jenkins CI'  // Context for the status
                 def status = currentBuild.resultIsBetterOrEqualTo('SUCCESS') ? 'SUCCESS' : 'FAILURE'
                 def description = "${status} on Jenkins"

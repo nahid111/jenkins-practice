@@ -4,10 +4,17 @@
 
 ## Installation
 
+### Install JDK
+
+```bash
+sudo apt update
+sudo apt install openjdk-17-jre
+```
+
 ### Build the Image
 
 ```bash
-docker build -t myjenkins-blueocean:2.414.2 .
+docker build -t myjenkins-blueocean .
 ```
 
 ### Create the network 'jenkins'
@@ -25,7 +32,7 @@ docker run --name jenkins-blueocean --restart=on-failure --detach \
   --publish 8080:8080 --publish 50000:50000 \
   --volume jenkins-data:/var/jenkins_home \
   --volume jenkins-docker-certs:/certs/client:ro \
-  myjenkins-blueocean:2.414.2
+  myjenkins-blueocean
 ```
 
 ### Get the Password

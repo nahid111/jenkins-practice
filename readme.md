@@ -53,7 +53,7 @@ docker run --name jenkins-blueocean --restart=on-failure --detach \
 docker exec jenkins-blueocean cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 
-### Connect to the Jenkins
+### Connect to the Jenkins from browser
 
 ```bash
 https://localhost:8080/

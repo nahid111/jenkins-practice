@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:2.414.3-alpine-jdk11
 USER root
 
-RUN apk add docker
+# RUN apk add docker
 
 USER jenkins
 RUN jenkins-plugin-cli --plugins github-pullrequest:0.5.0

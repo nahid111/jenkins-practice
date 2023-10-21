@@ -1,17 +1,9 @@
 FROM jenkins/jenkins:2.414.3-alpine-jdk11
 USER root
 
-ARG GOLANG_VERSION=1.21.3
-#we need the go version installed from apk to bootstrap the custom version built from source
-RUN apk update && apk add go gcc bash musl-dev openssl-dev ca-certificates && update-ca-certificates
-RUN wget https://dl.google.com/go/go$GOLANG_VERSION.src.tar.gz && tar -C /usr/local -xzf go$GOLANG_VERSION.src.tar.gz
-RUN cd /usr/local/go/src && ./make.bash
-ENV PATH=$PATH:/usr/local/go/bin
-RUN rm go$GOLANG_VERSION.src.tar.gz
-#we delete the apk installed version to avoid conflict
-RUN apk del go
-RUN go version
+RUN apk add docker
 
 USER jenkins
 RUN jenkins-plugin-cli --plugins github-pullrequest:0.5.0
 RUN jenkins-plugin-cli --plugins "blueocean docker-workflow"
+RUN jenkins-plugin-cli --plugins docker-plugin:1.5
